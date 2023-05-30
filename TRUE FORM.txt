@@ -1,0 +1,195 @@
+Algoritmo "Registro DESAFIO 3"
+tipo
+cadastro = registro
+         codigo: inteiro
+         nome: caractere
+         quant: inteiro
+fimregistro
+Var
+cadastros: vetor[1..10]de cadastro
+escolhas, cont_cadas: inteiro
+out: logico
+//==============================================================================
+procedimento cadastrar
+var
+cont_veri: inteiro
+true: logico
+resp: caracter
+inicio
+repita
+true:=verdadeiro
+limpatela
+cont_cadas:=cont_cadas+1
+   Escreval("===Bem vindo ao cadastro!===")
+   escreval
+   escreva("O Digite o codigo do produto: ")
+   leia(cadastros[cont_cadas].codigo)
+   escreva("Digite o nome do produto....: ")
+   leia(cadastros[cont_cadas].nome)
+   escreva("Digite a quantidade inicial.: ")
+   leia(cadastros[cont_cadas].quant)
+   escreval
+   escreval("======")
+      repita
+         escreva("Você deseja fazer outro cadastro: <s/n>")
+         leia(resp)
+            se resp="" entao
+               escreval("A resposta não pode ser vazia")
+               escreval
+            fimse
+      ate (resp<>"")
+ate (cont_cadas>=10) ou (minusc(resp)="n")
+limpatela
+fimprocedimento
+//==============================================================================
+procedimento regis_entrada
+var
+cont_regis, buscar, pausar, enter, quantidade1:inteiro
+resp_e: caracter
+inicio
+repita
+limpatela
+enter:=0
+ESCREVA("Digite o codigo do produto: ")
+leia(buscar)
+   repita
+   cont_regis:=cont_regis+1
+     se (cadastros[cont_regis].codigo)=buscar entao
+        enter:=1
+        escreval("Informações do produto....: ")
+        escreval(cadastros[cont_regis].codigo)
+        escreval(cadastros[cont_regis].nome)
+        escreval(cadastros[cont_regis].quant)
+        escreval("==========")
+        escreval
+        escreval("Digite a quantidade de produtos que saiu do estoque: ")
+        leia(quantidade1)
+        cadastros[cont_regis].quant:=cadastros[cont_regis].quant+quantidade1
+     fimse
+   ate cont_regis>=10
+se enter=0 entao
+   escreval("Produto não encontrado.")
+fimse
+cont_regis:=0
+       repita
+         escreval("============================================")
+         escreval("Você deseja fazer outra marcação de entrada:")
+         escreva ("<s/n>")
+         leia(resp_e)
+            se resp_e="" entao
+               escreval("A resposta não pode ser vazia")
+               escreval
+            fimse
+      ate (resp_e<>"")
+ate (minusc(resp_e)="n")
+limpatela
+fimprocedimento
+//==============================================================================
+procedimento regis_saida
+var
+cont_regis_s, buscar, pausar, enter, quantidade:inteiro
+resp_s: caracter
+inicio
+repita
+ limpatela
+ enter:=0
+ ESCREVA("Digite o codigo do produto: ")
+ leia(buscar)
+   repita
+   cont_regis_s:=cont_regis_s+1
+     se (cadastros[cont_regis_s].codigo)=buscar entao
+        enter:=1
+        escreval("Informações do produto....: ")
+        escreval(cadastros[cont_regis_s].codigo)
+        escreval(cadastros[cont_regis_s].nome)
+        escreval(cadastros[cont_regis_s].quant)
+        escreval("==========")
+        escreval
+        escreval("Digite a quantidade de produtos que saiu do estoque: ")
+        leia(quantidade)
+        cadastros[cont_regis_s].quant:=cadastros[cont_regis_s].quant-quantidade
+     fimse
+   ate cont_regis_s>=10
+ se enter=0 entao
+   escreval("Produto não encontrado.")
+ fimse
+cont_regis_s:=0
+       repita
+         escreval("==========================================")
+         escreval("Você deseja fazer outra marcação de saida:")
+         escreva ("<s/n>")
+         leia(resp_s)
+            se resp_s="" entao
+               escreval("A resposta não pode ser vazia")
+               escreval
+            fimse
+      ate (resp_s<>"")
+ate (minusc(resp_s)="n")
+ limpatela
+fimprocedimento
+//==============================================================================
+procedimento verificar
+var
+cont_veri, soma, out:inteiro
+enter:logico
+inicio
+limpatela
+enter:=verdadeiro
+repita
+cont_veri:=cont_veri+1
+     se (cadastros[cont_veri].codigo)<>0 entao
+     escreval("====================")
+     escreval("Codigo.....:", cadastros[cont_veri].codigo)
+     escreval("Nome.......: ", cadastros[cont_veri].nome)
+     escreval("Qunatidade.:", cadastros[cont_veri].quant)
+     escreval("====================")
+     escreval
+     enter:=falso
+     soma:=soma+cadastros[cont_veri].quant
+     fimse
+ate cont_veri>=10
+se enter=verdadeiro entao
+   escreval("===Não há produtos cadastrados===")
+senao
+     escreval("===============================")
+     escreval("A quantidade total de itens no estoque é: ", soma)
+     escreval
+fimse
+escreval
+escreval("Pressione <ENTER> para voltar para o menu.")
+leia(out)
+limpatela
+fimprocedimento
+//==============================================================================
+Inicio
+limpatela
+out:=verdadeiro
+repita
+escreval("===================")
+escreval("=====BEM-VINDO=====")
+ESCREVAL
+escreval("1-Para cadastrar...")
+escreval("2-Registrar entrada")
+escreval("3-Registrar saída..")
+escreval("4-Verificar saldo..")
+escreval("5-Sair.............")
+escreval
+ESCREVAl("==MAKE THE CHOICE==")
+escreval("===================")
+leia(escolhas)
+escolha escolhas
+        caso 1
+        cadastrar
+        caso 2
+        regis_entrada
+        caso 3
+        regis_saida
+        caso 4
+        verificar
+        caso 5
+        out:=falso
+fimescolha
+ate out=falso
+limpatela
+escreval("===Obrigado-por-usar===")
+Fimalgoritmo
